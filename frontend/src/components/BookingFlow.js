@@ -20,10 +20,13 @@ export default function BookingFlow({ profesionales, servicios, isAuthenticated 
   // Fetch slots when professional, service, and date are selected
   useEffect(() => {
     if (selectedProf && selectedServ && selectedDate) {
-      setLoadingSlots(true);
-      setBookingError("");
-      setSlots([]);
-      setSelectedSlot(null);
+      // Defer state updates to avoid React's synchronous cascading render warning
+      const timer = setTimeout(() => {
+        setLoadingSlots(true);
+        setBookingError("");
+        setSlots([]);
+        setSelectedSlot(null);
+      }, 0);
 
       fetch(`/api/disponibilidad?id=${selectedProf.id}&fecha=${selectedDate}&servicio_id=${selectedServ.id}`)
         .then((res) => {
@@ -40,6 +43,8 @@ export default function BookingFlow({ profesionales, servicios, isAuthenticated 
         .finally(() => {
           setLoadingSlots(false);
         });
+
+      return () => clearTimeout(timer);
     }
   }, [selectedProf, selectedServ, selectedDate]);
 

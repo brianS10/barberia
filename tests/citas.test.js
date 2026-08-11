@@ -5,6 +5,11 @@ const { limpiarDB, cerrarPool } = require('./setup');
 const pool = require('../src/db');
 const bcrypt = require('bcrypt');
 
+jest.mock('../src/utils/email', () => ({
+  enviarCorreo: jest.fn().mockResolvedValue()
+}));
+
+
 // Helpers para crear datos de prueba directamente en la DB
 async function crearUsuario(nombre, email, rol = 'cliente') {
   const hash = await bcrypt.hash('pass123', 10);

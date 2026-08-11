@@ -5,12 +5,12 @@ import { redirect } from "next/navigation";
 
 const API_URL = process.env.API_URL || "http://localhost:3001";
 
-export async function loginAction(prevState, formData) {
+export async function loginAction(formData) {
   const email = formData.get("email");
   const password = formData.get("password");
 
   if (!email || !password) {
-    return { error: "Todos los campos son requeridos." };
+    redirect("/login?error=Todos los campos son requeridos.");
   }
 
   try {
@@ -24,7 +24,7 @@ export async function loginAction(prevState, formData) {
     const data = await res.json();
 
     if (!res.ok) {
-      return { error: data.error || "Error al iniciar sesión." };
+      redirect(`/login?error=${encodeURIComponent(data.error || "Error al iniciar sesión.")}`);
     }
 
     const cookieStore = await cookies();
@@ -46,20 +46,23 @@ export async function loginAction(prevState, formData) {
       path: "/",
     });
   } catch (err) {
+    if (err.message && err.message.includes("NEXT_REDIRECT")) {
+      throw err;
+    }
     console.error("Login action error:", err);
-    return { error: "No se pudo conectar con el servidor." };
+    redirect("/login?error=No se pudo conectar con el servidor.");
   }
 
   redirect("/");
 }
 
-export async function registroAction(prevState, formData) {
+export async function registroAction(formData) {
   const nombre = formData.get("nombre");
   const email = formData.get("email");
   const password = formData.get("password");
 
   if (!nombre || !email || !password) {
-    return { error: "Todos los campos son requeridos." };
+    redirect("/registro?error=Todos los campos son requeridos.");
   }
 
   try {
@@ -73,7 +76,7 @@ export async function registroAction(prevState, formData) {
     const data = await res.json();
 
     if (!res.ok) {
-      return { error: data.error || "Error al registrarse." };
+      redirect(`/registro?error=${encodeURIComponent(data.error || "Error al registrarse.")}`);
     }
 
     const cookieStore = await cookies();
@@ -95,12 +98,16 @@ export async function registroAction(prevState, formData) {
       path: "/",
     });
   } catch (err) {
+    if (err.message && err.message.includes("NEXT_REDIRECT")) {
+      throw err;
+    }
     console.error("Registro action error:", err);
-    return { error: "No se pudo conectar con el servidor." };
+    redirect("/registro?error=No se pudo conectar con el servidor.");
   }
 
   redirect("/");
 }
+
 
 export async function logoutAction() {
   const cookieStore = await cookies();

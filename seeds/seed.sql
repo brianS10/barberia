@@ -1,4 +1,3 @@
-USE freshcut;
 
 -- Las contraseñas de seed son todas 'password123' hasheadas con bcrypt (10 rounds).
 -- En producción jamás harías esto, pero para seed de desarrollo está bien.

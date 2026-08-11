@@ -1,4 +1,3 @@
-USE freshcut;
 
 -- Estos dos índices son los que más importan: disponibilidad se consulta
 -- filtrando por profesional + rango de fechas constantemente.

@@ -6,6 +6,11 @@ const Bloqueo = require('../models/bloqueo');
 const Usuario = require('../models/usuario');
 const { enviarCorreo } = require('../utils/email');
 
+function toMySQLDatetime(date) {
+  return date.toISOString().slice(0, 19).replace('T', ' ');
+}
+
+
 async function agendar(req, res, next) {
   const { profesional_id, servicio_id, fecha_hora_inicio } = req.body;
 
@@ -52,8 +57,11 @@ async function agendar(req, res, next) {
     connection = await pool.getConnection();
     await connection.beginTransaction();
 
+    // Bloquear la fila del profesional para serializar reservas sobre él y prevenir deadlocks de Gap Locks
+    await connection.execute('SELECT id FROM profesionales WHERE id = ? FOR UPDATE', [profesional_id]);
+
     const conflictos = await Cita.citasActivasEnRangoForUpdate(
-      connection, profesional_id, inicio.toISOString(), fin.toISOString()
+      connection, profesional_id, toMySQLDatetime(inicio), toMySQLDatetime(fin)
     );
 
     if (conflictos.length > 0) {
@@ -83,8 +91,8 @@ async function agendar(req, res, next) {
       req.usuario.id,
       profesional_id,
       servicio_id,
-      inicio.toISOString(),
-      fin.toISOString()
+      toMySQLDatetime(inicio),
+      toMySQLDatetime(fin)
     );
 
     await connection.commit();

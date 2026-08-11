@@ -2,6 +2,11 @@ const Cita = require('../models/cita');
 const Bloqueo = require('../models/bloqueo');
 const Profesional = require('../models/profesional');
 
+function toMySQLDatetime(date) {
+  return date.toISOString().slice(0, 19).replace('T', ' ');
+}
+
+
 /**
  * Calcula los slots de inicio disponibles para un profesional en una fecha,
  * dado que el servicio requiere `duracionMin` minutos.
@@ -19,7 +24,7 @@ async function calcularDisponibilidad(profesionalId, fecha, duracionMin) {
 
   // Traer todo lo que ocupa tiempo ese día
   const [citas, bloqueos] = await Promise.all([
-    Cita.citasActivasEnRango(profesionalId, jornadaInicio.toISOString(), jornadaFin.toISOString()),
+    Cita.citasActivasEnRango(profesionalId, toMySQLDatetime(jornadaInicio), toMySQLDatetime(jornadaFin)),
     Bloqueo.bloqueosDelDia(profesionalId, fecha)
   ]);
 
