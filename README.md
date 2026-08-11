@@ -32,7 +32,7 @@ Esto levanta la API en `localhost:3000`, MySQL en `localhost:3306` y Adminer en 
 Después, corre las migraciones y seed:
 
 ```bash
-docker-compose exec api node scripts/migrate.js --seed
+docker compose exec api node scripts/migrate.js --seed
 ```
 
 ### Sin Docker
@@ -40,12 +40,17 @@ docker-compose exec api node scripts/migrate.js --seed
 Necesitas MySQL 8 corriendo localmente.
 
 ```bash
+# Configurar y levantar el Backend (Puerto 3001)
 cp .env.example .env
-# Edita .env con tus credenciales de MySQL
-
+# Edita .env con tus credenciales de MySQL (cambiar PORT a 3001 para evitar conflictos)
 npm install
 npm run seed    # Crea tablas e inserta datos de prueba
-npm run dev     # Levanta con --watch para recarga automática
+npm run dev     # Levanta el backend
+
+# Configurar y levantar el Frontend (Puerto 3000)
+cd frontend
+npm install
+npm run dev     # Levanta el frontend en http://localhost:3000
 ```
 
 ## Endpoints principales
