@@ -11,3 +11,5 @@ CREATE INDEX idx_bloqueos_prof_fecha ON bloqueos_horario(profesional_id, fecha_h
 -- modified
 
 -- modified
+
+-- modified
