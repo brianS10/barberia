@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { createServicioAction, createProfesionalAction } from "../app/actions";
+import { createServicioAction, createProfesionalAction, createEmpleadoAction } from "../app/actions";
 
 export default function AdminDashboard({ agendaData, profesionales, servicios, empleadosSinPerfil = [], selectedDate }) {
   const router = useRouter();
@@ -21,6 +21,11 @@ export default function AdminDashboard({ agendaData, profesionales, servicios, e
   const [profEspecialidad, setProfEspecialidad] = useState("");
   const [profHoraInicio, setProfHoraInicio] = useState("09:00");
   const [profHoraFin, setProfHoraFin] = useState("19:00");
+
+  // Create Employee Form State
+  const [empNombre, setEmpNombre] = useState("");
+  const [empEmail, setEmpEmail] = useState("");
+  const [empPassword, setEmpPassword] = useState("");
 
   const handleCreateService = async (e) => {
     e.preventDefault();
@@ -62,6 +67,29 @@ export default function AdminDashboard({ agendaData, profesionales, servicios, e
     } else {
       setProfUserId("");
       setProfEspecialidad("");
+      router.refresh();
+    }
+  };
+
+  const handleCreateEmployee = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setFormError("");
+
+    const formData = new FormData();
+    formData.append("nombre", empNombre);
+    formData.append("email", empEmail);
+    formData.append("password", empPassword);
+
+    const res = await createEmpleadoAction(null, formData);
+    setLoading(false);
+
+    if (res.error) {
+      setFormError(res.error);
+    } else {
+      setEmpNombre("");
+      setEmpEmail("");
+      setEmpPassword("");
       router.refresh();
     }
   };
@@ -263,92 +291,151 @@ export default function AdminDashboard({ agendaData, profesionales, servicios, e
                 </div>
               ))}
             </div>
-          </div>
+          </div>          {/* Sidebar Forms */}
+          <div className="space-y-8">
+            {/* Create Employee User Form */}
+            <div className="rounded-lg border border-[#B08D57]/10 bg-[#26221D] p-6 shadow-lg h-fit">
+              <h3 className="font-display text-lg font-bold text-[#B08D57] mb-4">Registrar Nuevo Empleado</h3>
+              <form onSubmit={handleCreateEmployee} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-[#F2ECE2]/80 mb-1">
+                    Nombre Completo
+                  </label>
+                  <input
+                    type="text"
+                    value={empNombre}
+                    onChange={(e) => setEmpNombre(e.target.value)}
+                    required
+                    placeholder="Juan Gómez"
+                    className="w-full rounded border border-[#B08D57]/20 bg-[#1C1A17] px-3 py-2 text-sm text-[#F2ECE2] focus:border-[#B08D57] focus:outline-none"
+                  />
+                </div>
 
-          {/* Create Professional Profile Form */}
-          <div className="rounded-lg border border-[#B08D57]/10 bg-[#26221D] p-6 shadow-lg h-fit">
-            <h3 className="font-display text-lg font-bold text-[#B08D57] mb-4">Perfil Profesional</h3>
-            <form onSubmit={handleCreateProfessional} className="space-y-4">
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[#F2ECE2]/80 mb-1">
-                  Seleccionar Empleado
-                </label>
-                <select
-                  value={profUserId}
-                  onChange={(e) => setProfUserId(e.target.value)}
-                  required
-                  className="w-full rounded border border-[#B08D57]/20 bg-[#1C1A17] px-3 py-2 text-sm text-[#F2ECE2] focus:border-[#B08D57] focus:outline-none"
+                <div>
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-[#F2ECE2]/80 mb-1">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    value={empEmail}
+                    onChange={(e) => setEmpEmail(e.target.value)}
+                    required
+                    placeholder="juan@freshcut.com"
+                    className="w-full rounded border border-[#B08D57]/20 bg-[#1C1A17] px-3 py-2 text-sm text-[#F2ECE2] focus:border-[#B08D57] focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-[#F2ECE2]/80 mb-1">
+                    Contraseña
+                  </label>
+                  <input
+                    type="password"
+                    value={empPassword}
+                    onChange={(e) => setEmpPassword(e.target.value)}
+                    required
+                    placeholder="••••••••"
+                    className="w-full rounded border border-[#B08D57]/20 bg-[#1C1A17] px-3 py-2 text-sm text-[#F2ECE2] focus:border-[#B08D57] focus:outline-none"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full rounded bg-[#B08D57] py-2.5 text-xs font-bold text-[#1C1A17] hover:bg-[#B08D57]/90 disabled:opacity-50 transition-colors shadow cursor-pointer"
                 >
-                  <option value="">Selecciona un empleado...</option>
-                  {empleadosSinPerfil.length === 0 ? (
-                    <option disabled value="">
-                      No hay empleados sin perfil
-                    </option>
-                  ) : (
-                    empleadosSinPerfil.map((emp) => (
-                      <option key={emp.id} value={emp.id}>
-                        {emp.nombre} ({emp.email})
+                  {loading ? "Registrando..." : "Registrar Empleado"}
+                </button>
+              </form>
+            </div>
+
+            {/* Create Professional Profile Form */}
+            <div className="rounded-lg border border-[#B08D57]/10 bg-[#26221D] p-6 shadow-lg h-fit">
+              <h3 className="font-display text-lg font-bold text-[#B08D57] mb-4">Perfil Profesional</h3>
+              <form onSubmit={handleCreateProfessional} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-[#F2ECE2]/80 mb-1">
+                    Seleccionar Empleado
+                  </label>
+                  <select
+                    value={profUserId}
+                    onChange={(e) => setProfUserId(e.target.value)}
+                    required
+                    className="w-full rounded border border-[#B08D57]/20 bg-[#1C1A17] px-3 py-2 text-sm text-[#F2ECE2] focus:border-[#B08D57] focus:outline-none"
+                  >
+                    <option value="">Selecciona un empleado...</option>
+                    {empleadosSinPerfil.length === 0 ? (
+                      <option disabled value="">
+                        No hay empleados sin perfil
                       </option>
-                    ))
-                  )}
-                </select>
-              </div>
+                    ) : (
+                      empleadosSinPerfil.map((emp) => (
+                        <option key={emp.id} value={emp.id}>
+                          {emp.nombre} ({emp.email})
+                        </option>
+                      ))
+                    )}
+                  </select>
+                </div>
 
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[#F2ECE2]/80 mb-1">
-                  Especialidad
-                </label>
-                <input
-                  type="text"
-                  value={profEspecialidad}
-                  onChange={(e) => setProfEspecialidad(e.target.value)}
-                  required
-                  placeholder="Diseño de barba y corte"
-                  className="w-full rounded border border-[#B08D57]/20 bg-[#1C1A17] px-3 py-2 text-sm text-[#F2ECE2] focus:border-[#B08D57] focus:outline-none"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold uppercase tracking-wider text-[#F2ECE2]/80 mb-1">
-                    Hora Inicio
+                    Especialidad
                   </label>
                   <input
-                    type="time"
-                    value={profHoraInicio}
-                    onChange={(e) => setProfHoraInicio(e.target.value)}
+                    type="text"
+                    value={profEspecialidad}
+                    onChange={(e) => setProfEspecialidad(e.target.value)}
                     required
-                    className="w-full rounded border border-[#B08D57]/20 bg-[#1C1A17] px-3 py-2 text-sm text-[#F2ECE2] focus:border-[#B08D57] focus:outline-none font-mono"
+                    placeholder="Diseño de barba y corte"
+                    className="w-full rounded border border-[#B08D57]/20 bg-[#1C1A17] px-3 py-2 text-sm text-[#F2ECE2] focus:border-[#B08D57] focus:outline-none"
                   />
                 </div>
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-[#F2ECE2]/80 mb-1">
-                    Hora Fin
-                  </label>
-                  <input
-                    type="time"
-                    value={profHoraFin}
-                    onChange={(e) => setProfHoraFin(e.target.value)}
-                    required
-                    className="w-full rounded border border-[#B08D57]/20 bg-[#1C1A17] px-3 py-2 text-sm text-[#F2ECE2] focus:border-[#B08D57] focus:outline-none font-mono"
-                  />
-                </div>
-              </div>
 
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full rounded bg-[#B08D57] py-2.5 text-xs font-bold text-[#1C1A17] hover:bg-[#B08D57]/90 disabled:opacity-50 transition-colors shadow cursor-pointer"
-              >
-                {loading ? "Registrando..." : "Crear Perfil"}
-              </button>
-            </form>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-[#F2ECE2]/80 mb-1">
+                      Hora Inicio
+                    </label>
+                    <input
+                      type="time"
+                      value={profHoraInicio}
+                      onChange={(e) => setProfHoraInicio(e.target.value)}
+                      required
+                      className="w-full rounded border border-[#B08D57]/20 bg-[#1C1A17] px-3 py-2 text-sm text-[#F2ECE2] focus:border-[#B08D57] focus:outline-none font-mono"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-[#F2ECE2]/80 mb-1">
+                      Hora Fin
+                    </label>
+                    <input
+                      type="time"
+                      value={profHoraFin}
+                      onChange={(e) => setProfHoraFin(e.target.value)}
+                      required
+                      className="w-full rounded border border-[#B08D57]/20 bg-[#1C1A17] px-3 py-2 text-sm text-[#F2ECE2] focus:border-[#B08D57] focus:outline-none font-mono"
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full rounded bg-[#B08D57] py-2.5 text-xs font-bold text-[#1C1A17] hover:bg-[#B08D57]/90 disabled:opacity-50 transition-colors shadow cursor-pointer"
+                >
+                  {loading ? "Registrando..." : "Crear Perfil"}
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       )}
     </div>
   );
 }
+
+// modified
 
 // modified
 

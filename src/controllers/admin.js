@@ -80,8 +80,37 @@ async function listarEmpleadosSinPerfil(req, res, next) {
   }
 }
 
-module.exports = { agendaGeneral, crearServicio, crearProfesional, listarEmpleadosSinPerfil };
+async function crearEmpleado(req, res, next) {
+  try {
+    const { nombre, email, password } = req.body;
+    if (!nombre || !email || !password) {
+      const err = new Error('nombre, email y password son requeridos');
+      err.status = 400;
+      throw err;
+    }
 
+    const existente = await Usuario.findByEmail(email);
+    if (existente) {
+      const err = new Error('El email ya está registrado');
+      err.status = 409;
+      throw err;
+    }
+
+    const bcrypt = require('bcrypt');
+    const hash = await bcrypt.hash(password, 10);
+    const id = await Usuario.crear(nombre, email, hash, 'empleado');
+
+    res.status(201).json({ id, nombre, email, rol: 'empleado' });
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = { agendaGeneral, crearServicio, crearProfesional, listarEmpleadosSinPerfil, crearEmpleado };
+
+
+
+// modified
 
 // modified
 

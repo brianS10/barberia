@@ -359,6 +359,49 @@ export async function createProfesionalAction(prevState, formData) {
   }
 }
 
+export async function createEmpleadoAction(prevState, formData) {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("accessToken")?.value;
+
+  if (!token) {
+    return { error: "Debes iniciar sesión." };
+  }
+
+  const nombre = formData.get("nombre");
+  const email = formData.get("email");
+  const password = formData.get("password");
+
+  if (!nombre || !email || !password) {
+    return { error: "Todos los campos son requeridos." };
+  }
+
+  try {
+    const res = await fetch(`${API_URL}/admin/empleados`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify({ nombre, email, password }),
+      cache: "no-store",
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      return { error: data.error || "Error al crear el empleado." };
+    }
+
+    return { success: true };
+  } catch (err) {
+    console.error("Create empleado error:", err);
+    return { error: "No se pudo conectar con el servidor." };
+  }
+}
+
+
+// modified
+
 // modified
 
 // modified
