@@ -31,9 +31,6 @@ docker compose up --build
 ```
 Levanta: API en el puerto 3000, MySQL en el 3306 y Adminer en el 8080.
 
-## Variables de entorno
-
-Copia `.env.example` a un archivo `.env` y edita los valores correspondientes (`DB_USER`, `DB_PASSWORD`, etc.). No subas el archivo `.env` a git.
 
 ## Despliegue
 
