@@ -117,3 +117,5 @@ function generarRefreshToken(payload) {
 }
 
 module.exports = { registro, login, refresh };
+
+// modified

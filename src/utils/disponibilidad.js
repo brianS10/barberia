@@ -100,3 +100,5 @@ async function calcularDisponibilidad(profesionalId, fecha, duracionMin) {
 }
 
 module.exports = { calcularDisponibilidad };
+
+// modified

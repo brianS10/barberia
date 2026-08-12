@@ -30,3 +30,5 @@ async function eliminar(id) {
 }
 
 module.exports = { bloqueosDelDia, crear, findById, eliminar };
+
+// modified

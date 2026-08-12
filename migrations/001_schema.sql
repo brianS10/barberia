@@ -46,3 +46,5 @@ CREATE TABLE bloqueos_horario (
   motivo VARCHAR(100),
   FOREIGN KEY (profesional_id) REFERENCES profesionales(id)
 );
+
+-- modified

@@ -135,3 +135,5 @@ describe('Algoritmo de disponibilidad', () => {
     expect(slots).toContain('16:30');
   });
 });
+
+// modified

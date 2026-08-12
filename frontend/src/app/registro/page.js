@@ -91,3 +91,5 @@ export default async function RegistroPage({ searchParams }) {
     </div>
   );
 }
+
+// modified

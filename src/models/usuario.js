@@ -25,3 +25,5 @@ async function crear(nombre, email, passwordHash, rol = 'cliente') {
 }
 
 module.exports = { findByEmail, findById, crear };
+
+// modified

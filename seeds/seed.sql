@@ -32,3 +32,5 @@ INSERT INTO servicios (nombre, duracion_min, precio) VALUES
   ('Corte + Barba', 45, 220.00),
   ('Tinte completo', 90, 450.00),
   ('Alisado', 60, 350.00);
+
+-- modified

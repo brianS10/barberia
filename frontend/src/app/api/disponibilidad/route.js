@@ -29,3 +29,5 @@ export async function GET(request) {
     return NextResponse.json({ error: "No se pudo conectar con el servidor" }, { status: 500 });
   }
 }
+
+// modified
