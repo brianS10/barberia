@@ -8,7 +8,7 @@ async function startServer() {
   await ensureDatabaseSchema();
   
   app.listen(PORT, () => {
-    console.log(`FreshCut API corriendo en puerto ${PORT}`);
+    console.log(`Barber API corriendo en puerto ${PORT}`);
   });
 }
 
@@ -17,6 +17,8 @@ startServer().catch(err => {
   process.exit(1);
 });
 
+
+// modified
 
 // modified
 

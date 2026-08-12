@@ -42,3 +42,5 @@ module.exports = { findByEmail, findById, crear, findEmpleadosSinPerfil };
 // modified
 
 // modified
+
+// modified

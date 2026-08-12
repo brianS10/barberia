@@ -3,9 +3,9 @@ services:
     image: mysql:8
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: freshcut
-      MYSQL_USER: freshcut
-      MYSQL_PASSWORD: freshcut_secret
+      MYSQL_DATABASE: barber
+      MYSQL_USER: barber
+      MYSQL_PASSWORD: barber_secret
     ports:
       - "3306:3306"
     volumes:
@@ -23,9 +23,9 @@ services:
     environment:
       DB_HOST: db
       DB_PORT: 3306
-      DB_USER: freshcut
-      DB_PASSWORD: freshcut_secret
-      DB_NAME: freshcut
+      DB_USER: barber
+      DB_PASSWORD: barber_secret
+      DB_NAME: barber
       JWT_SECRET: docker-dev-secret
       JWT_REFRESH_SECRET: docker-dev-refresh
       JWT_EXPIRES_IN: 15m
@@ -45,4 +45,4 @@ services:
 
 volumes:
   db_data:
-   
+    

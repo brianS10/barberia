@@ -1,5 +1,5 @@
 {
-  "name": "freshcut",
+  "name": "barber",
   "version": "1.0.0",
   "description": "API de gestión de citas para barberías",
   "main": "server.js",
@@ -12,7 +12,7 @@
     "test": "jest --runInBand --forceExit"
   },
   "dependencies": {
-    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "jsonwebtoken": "^9.0.2",
@@ -28,4 +28,4 @@
     "testEnvironment": "node"
   }
 }
-   
+    

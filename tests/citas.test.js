@@ -3,7 +3,7 @@ const request = require('supertest');
 const app = require('../src/app');
 const { limpiarDB, cerrarPool } = require('./setup');
 const pool = require('../src/db');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 jest.mock('../src/utils/email', () => ({
   enviarCorreo: jest.fn().mockResolvedValue()
@@ -191,6 +191,8 @@ describe('Citas endpoints', () => {
     expect(statuses).toEqual([201, 409]);
   });
 });
+
+// modified
 
 // modified
 

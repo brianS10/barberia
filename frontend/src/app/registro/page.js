@@ -9,7 +9,7 @@ export default async function RegistroPage({ searchParams }) {
       <header className="border-b border-[#B08D57]/20 bg-[#26221D] px-6 py-4">
         <div className="mx-auto max-w-6xl">
           <Link href="/" className="font-display text-2xl font-bold tracking-wide text-[#B08D57]">
-            FreshCut
+            Barber
           </Link>
         </div>
       </header>
@@ -17,7 +17,7 @@ export default async function RegistroPage({ searchParams }) {
       <main className="flex flex-1 items-center justify-center p-6">
         <div className="w-full max-w-md rounded-lg border border-[#B08D57]/20 bg-[#26221D] p-8 shadow-xl">
           <h1 className="font-display text-3xl font-bold text-[#B08D57] mb-2 text-center">
-            Únete a FreshCut
+            Únete a Barber
           </h1>
           <p className="text-sm text-[#F2ECE2]/60 mb-6 text-center">
             Crea una cuenta para agendar y gestionar tus citas fácilmente.
@@ -91,6 +91,8 @@ export default async function RegistroPage({ searchParams }) {
     </div>
   );
 }
+
+// modified
 
 // modified
 

@@ -91,7 +91,7 @@ export default function BookingFlow({ profesionales, servicios, isAuthenticated 
 
           <div className="text-center border-b border-[#B08D57]/20 pb-6 mb-6">
             <span className="font-mono text-xs uppercase tracking-widest text-[#B08D57]">Turno físico digital</span>
-            <h2 className="font-display text-3xl font-bold mt-2">FreshCut Barbería</h2>
+            <h2 className="font-display text-3xl font-bold mt-2">Barber Barbería</h2>
           </div>
 
           <div className="space-y-4 font-sans text-sm">
@@ -294,6 +294,8 @@ export default function BookingFlow({ profesionales, servicios, isAuthenticated 
     </div>
   );
 }
+
+// modified
 
 // modified
 

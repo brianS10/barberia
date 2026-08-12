@@ -320,7 +320,7 @@ export default function AdminDashboard({ agendaData, profesionales, servicios, e
                     value={empEmail}
                     onChange={(e) => setEmpEmail(e.target.value)}
                     required
-                    placeholder="juan@freshcut.com"
+                    placeholder="juan@barber.com"
                     className="w-full rounded border border-[#B08D57]/20 bg-[#1C1A17] px-3 py-2 text-sm text-[#F2ECE2] focus:border-[#B08D57] focus:outline-none"
                   />
                 </div>
@@ -434,6 +434,8 @@ export default function AdminDashboard({ agendaData, profesionales, servicios, e
     </div>
   );
 }
+
+// modified
 
 // modified
 

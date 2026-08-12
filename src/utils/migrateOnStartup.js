@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const mysql = require('mysql2/promise');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const dbConfig = {
   host: process.env.DB_HOST,
@@ -68,6 +68,8 @@ async function ensureDatabaseSchema() {
 }
 
 module.exports = { ensureDatabaseSchema };
+
+// modified
 
 // modified
 

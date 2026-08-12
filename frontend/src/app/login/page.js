@@ -9,7 +9,7 @@ export default async function LoginPage({ searchParams }) {
       <header className="border-b border-[#B08D57]/20 bg-[#26221D] px-6 py-4">
         <div className="mx-auto max-w-6xl">
           <Link href="/" className="font-display text-2xl font-bold tracking-wide text-[#B08D57]">
-            FreshCut
+            Barber
           </Link>
         </div>
       </header>
@@ -77,6 +77,8 @@ export default async function LoginPage({ searchParams }) {
     </div>
   );
 }
+
+// modified
 
 // modified
 

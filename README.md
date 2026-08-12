@@ -1,4 +1,4 @@
-# FreshCut 💈
+# Barber 💈
 
 Sistema de gestión de citas para barberías. Múltiples profesionales, duración de servicio variable, concurrencia resuelta a nivel de base de datos, sin pagos en línea.
 
@@ -102,9 +102,9 @@ cp .env.example .env
 | `PORT` | Puerto del backend | `3001` |
 | `DB_HOST` | Host de MySQL | `127.0.0.1` |
 | `DB_PORT` | Puerto de MySQL | `3306` |
-| `DB_USER` | Usuario | `freshcut` |
-| `DB_PASSWORD` | Contraseña | `freshcut_secret` |
-| `DB_NAME` | Base de datos | `freshcut` |
+| `DB_USER` | Usuario | `barber` |
+| `DB_PASSWORD` | Contraseña | `barber_secret` |
+| `DB_NAME` | Base de datos | `barber` |
 | `JWT_SECRET` | Secreto access token | (cadena larga y aleatoria) |
 | `JWT_REFRESH_SECRET` | Secreto refresh token | (otra cadena diferente) |
 
@@ -291,4 +291,4 @@ src/
   app.js        # Express setup
 ```
 # barberia
-   
+    

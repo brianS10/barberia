@@ -15,9 +15,9 @@ jobs:
         image: mysql:8
         env:
           MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: freshcut
-          MYSQL_USER: freshcut
-          MYSQL_PASSWORD: freshcut_secret
+          MYSQL_DATABASE: barber
+          MYSQL_USER: barber
+          MYSQL_PASSWORD: barber_secret
         ports:
           - 3306:3306
         options: >-
@@ -29,9 +29,9 @@ jobs:
     env:
       DB_HOST: 127.0.0.1
       DB_PORT: 3306
-      DB_USER: freshcut
-      DB_PASSWORD: freshcut_secret
-      DB_NAME: freshcut
+      DB_USER: barber
+      DB_PASSWORD: barber_secret
+      DB_NAME: barber
       JWT_SECRET: ci-test-secret
       JWT_REFRESH_SECRET: ci-test-refresh
       JWT_EXPIRES_IN: 15m
@@ -79,7 +79,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: docker build -t freshcut .
+      - run: docker build -t barber .
 
   push:
     needs: build
@@ -99,7 +99,7 @@ jobs:
 
       - name: Build and push
         run: |
-          IMAGE_NAME=$(echo "ghcr.io/${{ github.repository_owner }}/freshcut" | tr '[:upper:]' '[:lower:]')
+          IMAGE_NAME=$(echo "ghcr.io/${{ github.repository_owner }}/barber" | tr '[:upper:]' '[:lower:]')
           docker build -t $IMAGE_NAME:latest .
           docker push $IMAGE_NAME:latest
-   
+    

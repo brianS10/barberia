@@ -101,7 +101,7 @@ async function agendar(req, res, next) {
     const cliente = await Usuario.findById(req.usuario.id);
     enviarCorreo(
       cliente.email,
-      'Cita confirmada — FreshCut',
+      'Cita confirmada — Barber',
       `Tu cita de ${servicio.nombre} con ${profesional.nombre} ha sido agendada para ${inicio.toLocaleString()}.`
     );
 
@@ -170,7 +170,7 @@ async function cancelar(req, res, next) {
     const tipo = nuevoEstado === 'cancelada' ? 'Cancelación' : 'Cancelación tardía';
     enviarCorreo(
       cliente.email,
-      `${tipo} de cita — FreshCut`,
+      `${tipo} de cita — Barber`,
       `Tu cita del ${inicioCita.toLocaleString()} ha sido marcada como "${nuevoEstado}".`
     );
 
@@ -181,6 +181,8 @@ async function cancelar(req, res, next) {
 }
 
 module.exports = { agendar, misCitas, cancelar };
+
+// modified
 
 // modified
 

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const mysql = require('mysql2/promise');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
 const dbConfig = {
@@ -67,6 +67,8 @@ async function main() {
 }
 
 main();
+
+// modified
 
 // modified
 

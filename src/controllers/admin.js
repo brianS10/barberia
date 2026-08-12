@@ -96,7 +96,7 @@ async function crearEmpleado(req, res, next) {
       throw err;
     }
 
-    const bcrypt = require('bcrypt');
+    const bcrypt = require('bcryptjs');
     const hash = await bcrypt.hash(password, 10);
     const id = await Usuario.crear(nombre, email, hash, 'empleado');
 
@@ -109,6 +109,8 @@ async function crearEmpleado(req, res, next) {
 module.exports = { agendaGeneral, crearServicio, crearProfesional, listarEmpleadosSinPerfil, crearEmpleado };
 
 
+
+// modified
 
 // modified
 

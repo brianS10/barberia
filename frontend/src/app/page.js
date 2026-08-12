@@ -37,7 +37,7 @@ export default async function HomePage() {
       <Header />
 
       <main className="flex-1 mx-auto w-full max-w-6xl px-6 py-12">
-        {/* Banner/Hero section styled according to FreshCut_DESIGN.md */}
+        {/* Banner/Hero section styled according to Barber_DESIGN.md */}
         <section className="text-center md:text-left mb-12 border-b border-[#B08D57]/10 pb-10">
           <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-[#B08D57] tracking-tight">
             Reserva tu Estilo
@@ -63,11 +63,13 @@ export default async function HomePage() {
       </main>
 
       <footer className="border-t border-[#B08D57]/10 bg-[#26221D] py-8 text-center text-xs text-[#F2ECE2]/40">
-        <p>© {new Date().getFullYear()} FreshCut Barbería. Hecho con estilo y tradición.</p>
+        <p>© {new Date().getFullYear()} Barber Barbería. Hecho con estilo y tradición.</p>
       </footer>
     </div>
   );
 }
+
+// modified
 
 // modified
 

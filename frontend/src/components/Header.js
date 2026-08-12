@@ -8,7 +8,7 @@ export default async function Header() {
     <header className="border-b border-[#B08D57]/20 bg-[#26221D] px-6 py-4 shadow-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between">
         <Link href="/" className="font-display text-2xl font-bold tracking-wide text-[#B08D57] hover:opacity-90">
-          FreshCut
+          Barber
         </Link>
         <nav className="flex items-center space-x-6 text-sm font-medium">
           <Link href="/" className="hover:text-[#B08D57] transition-colors">
@@ -50,6 +50,8 @@ export default async function Header() {
     </header>
   );
 }
+
+// modified
 
 // modified
 

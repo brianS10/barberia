@@ -24,7 +24,7 @@ async function enviarCorreo(to, subject, text) {
   try {
     const transporter = await getTransporter();
     const info = await transporter.sendMail({
-      from: '"FreshCut" <noreply@freshcut.com>',
+      from: '"Barber" <noreply@barber.com>',
       to,
       subject,
       text
@@ -37,6 +37,8 @@ async function enviarCorreo(to, subject, text) {
 }
 
 module.exports = { enviarCorreo };
+
+// modified
 
 // modified
 

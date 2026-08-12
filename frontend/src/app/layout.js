@@ -21,7 +21,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata = {
-  title: "FreshCut Barbería",
+  title: "Barber Barbería",
   description: "Reserva de citas de barbería premium con estilo y tradición.",
 };
 
@@ -37,6 +37,8 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+
+// modified
 
 // modified
 

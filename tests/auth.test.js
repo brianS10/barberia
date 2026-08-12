@@ -2,7 +2,7 @@ require('dotenv').config();
 const request = require('supertest');
 const app = require('../src/app');
 const { limpiarDB, cerrarPool } = require('./setup');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const pool = require('../src/db');
 
 describe('Auth endpoints', () => {
@@ -81,6 +81,8 @@ describe('Auth endpoints', () => {
     expect(res.status).toBe(403);
   });
 });
+
+// modified
 
 // modified
 

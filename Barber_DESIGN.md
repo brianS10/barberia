@@ -1,4 +1,4 @@
-# FreshCut — Dirección de Diseño
+# Barber — Dirección de Diseño
 
 Antes de escribir cualquier componente, sigue este plan exactamente. No uses paletas ni layouts "por defecto" fuera de lo que aquí se especifica.
 
@@ -10,7 +10,7 @@ El diseño generado por IA en 2025-2026 cae casi siempre en uno de tres patrones
 2. Fondo casi negro + un solo acento verde ácido o vermellón brillante
 3. Layout tipo periódico: reglas finas, cero border-radius, columnas densas
 
-Ninguno de los tres se usa aquí. FreshCut se inspira en el mundo real de una barbería: cuero, latón, acero de navaja, pizarra de menú de precios — no en una plantilla de SaaS.
+Ninguno de los tres se usa aquí. Barber se inspira en el mundo real de una barbería: cuero, latón, acero de navaja, pizarra de menú de precios — no en una plantilla de SaaS.
 
 ## Paleta (tokens)
 
@@ -69,4 +69,4 @@ Escribe desde el lado del cliente, no del sistema: "Elige tu horario", no "Selec
 - [ ] ¿Hay algún gradiente decorativo sin justificación? → quítalo
 - [ ] ¿El ticket dentado es el único elemento con tratamiento especial?
 - [ ] ¿Funciona en mobile y con foco visible de teclado?
-   
+    

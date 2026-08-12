@@ -6,13 +6,13 @@
 
 -- Admin
 INSERT INTO usuarios (nombre, email, password_hash, rol) VALUES
-  ('Admin FreshCut', 'admin@freshcut.com', '$ADMIN_HASH$', 'admin');
+  ('Admin Barber', 'admin@barber.com', '$ADMIN_HASH$', 'admin');
 
 -- Empleados
 INSERT INTO usuarios (nombre, email, password_hash, rol) VALUES
-  ('Carlos Mendoza', 'carlos@freshcut.com', '$HASH$', 'empleado'),
-  ('Andrea López', 'andrea@freshcut.com', '$HASH$', 'empleado'),
-  ('Miguel Torres', 'miguel@freshcut.com', '$HASH$', 'empleado');
+  ('Carlos Mendoza', 'carlos@barber.com', '$HASH$', 'empleado'),
+  ('Andrea López', 'andrea@barber.com', '$HASH$', 'empleado'),
+  ('Miguel Torres', 'miguel@barber.com', '$HASH$', 'empleado');
 
 -- Profesionales (vinculados a los empleados)
 INSERT INTO profesionales (usuario_id, especialidad, hora_inicio_laboral, hora_fin_laboral) VALUES
@@ -32,6 +32,8 @@ INSERT INTO servicios (nombre, duracion_min, precio) VALUES
   ('Corte + Barba', 45, 220.00),
   ('Tinte completo', 90, 450.00),
   ('Alisado', 60, 350.00);
+
+-- modified
 
 -- modified
 

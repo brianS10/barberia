@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Usuario = require('../models/usuario');
 
@@ -117,6 +117,8 @@ function generarRefreshToken(payload) {
 }
 
 module.exports = { registro, login, refresh };
+
+// modified
 
 // modified
 
