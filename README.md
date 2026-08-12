@@ -59,4 +59,3 @@ npm test
 npx jest tests/disponibilidad.test.js
 ```
 
-Licencia MIT 
