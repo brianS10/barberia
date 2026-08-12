@@ -9,16 +9,20 @@ const API_URL = process.env.API_URL || "http://localhost:3001";
 
 async function getAdminData(token, fecha) {
   try {
-    const [agendaRes, profRes, servRes] = await Promise.all([
+    const [agendaRes, profRes, servRes, emplRes] = await Promise.all([
       fetch(`${API_URL}/admin/agenda-general?fecha=${fecha}`, {
         headers: { "Authorization": `Bearer ${token}` },
         cache: "no-store",
       }),
       fetch(`${API_URL}/profesionales`, { cache: "no-store" }),
       fetch(`${API_URL}/servicios`, { cache: "no-store" }),
+      fetch(`${API_URL}/admin/empleados-sin-perfil`, {
+        headers: { "Authorization": `Bearer ${token}` },
+        cache: "no-store",
+      }),
     ]);
 
-    if (!agendaRes.ok || !profRes.ok || !servRes.ok) {
+    if (!agendaRes.ok || !profRes.ok || !servRes.ok || !emplRes.ok) {
       if (agendaRes.status === 401 || agendaRes.status === 403) return { error: "unauthorized" };
       throw new Error("Error al obtener los datos de administración.");
     }
@@ -26,11 +30,12 @@ async function getAdminData(token, fecha) {
     const agendaData = await agendaRes.json();
     const profesionales = await profRes.json();
     const servicios = await servRes.json();
+    const empleadosSinPerfil = await emplRes.json();
 
-    return { agendaData, profesionales, servicios, error: null };
+    return { agendaData, profesionales, servicios, empleadosSinPerfil, error: null };
   } catch (err) {
     console.error("Fetch admin data error:", err);
-    return { agendaData: null, profesionales: [], servicios: [], error: "No se pudo conectar con el servidor." };
+    return { agendaData: null, profesionales: [], servicios: [], empleadosSinPerfil: [], error: "No se pudo conectar con el servidor." };
   }
 }
 
@@ -49,7 +54,7 @@ export default async function AdminPage({ searchParams }) {
   const todayStr = new Date().toISOString().split("T")[0];
   const selectedDate = fecha || todayStr;
 
-  const { agendaData, profesionales, servicios, error } = await getAdminData(auth.token, selectedDate);
+  const { agendaData, profesionales, servicios, empleadosSinPerfil, error } = await getAdminData(auth.token, selectedDate);
 
   if (error === "unauthorized") {
     redirect("/login?error=Sesión expirada o permisos insuficientes.");
@@ -97,6 +102,7 @@ export default async function AdminPage({ searchParams }) {
             agendaData={agendaData}
             profesionales={profesionales}
             servicios={servicios}
+            empleadosSinPerfil={empleadosSinPerfil}
             selectedDate={selectedDate}
           />
         )}
@@ -104,5 +110,7 @@ export default async function AdminPage({ searchParams }) {
     </div>
   );
 }
+
+// modified
 
 // modified

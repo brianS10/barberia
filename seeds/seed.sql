@@ -34,3 +34,5 @@ INSERT INTO servicios (nombre, duracion_min, precio) VALUES
   ('Alisado', 60, 350.00);
 
 -- modified
+
+-- modified

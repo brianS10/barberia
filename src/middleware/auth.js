@@ -29,3 +29,5 @@ function requiereRol(...roles) {
 module.exports = { verificarToken, requiereRol };
 
 // modified
+
+// modified

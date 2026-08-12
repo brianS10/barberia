@@ -24,6 +24,19 @@ async function crear(nombre, email, passwordHash, rol = 'cliente') {
   return result.insertId;
 }
 
-module.exports = { findByEmail, findById, crear };
+async function findEmpleadosSinPerfil() {
+  const [rows] = await pool.execute(`
+    SELECT u.id, u.nombre, u.email 
+    FROM usuarios u
+    LEFT JOIN profesionales p ON u.id = p.usuario_id
+    WHERE u.rol = 'empleado' AND p.id IS NULL
+  `);
+  return rows;
+}
+
+module.exports = { findByEmail, findById, crear, findEmpleadosSinPerfil };
+
+
+// modified
 
 // modified

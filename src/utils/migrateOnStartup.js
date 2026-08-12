@@ -68,3 +68,5 @@ async function ensureDatabaseSchema() {
 }
 
 module.exports = { ensureDatabaseSchema };
+
+// modified

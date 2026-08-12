@@ -69,4 +69,4 @@ Escribe desde el lado del cliente, no del sistema: "Elige tu horario", no "Selec
 - [ ] ¿Hay algún gradiente decorativo sin justificación? → quítalo
 - [ ] ¿El ticket dentado es el único elemento con tratamiento especial?
 - [ ] ¿Funciona en mobile y con foco visible de teclado?
- 
+  

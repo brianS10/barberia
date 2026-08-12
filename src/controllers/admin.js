@@ -71,6 +71,18 @@ async function crearProfesional(req, res, next) {
   }
 }
 
-module.exports = { agendaGeneral, crearServicio, crearProfesional };
+async function listarEmpleadosSinPerfil(req, res, next) {
+  try {
+    const empleados = await Usuario.findEmpleadosSinPerfil();
+    res.json(empleados);
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = { agendaGeneral, crearServicio, crearProfesional, listarEmpleadosSinPerfil };
+
+
+// modified
 
 // modified

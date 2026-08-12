@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createServicioAction, createProfesionalAction } from "../app/actions";
 
-export default function AdminDashboard({ agendaData, profesionales, servicios, selectedDate }) {
+export default function AdminDashboard({ agendaData, profesionales, servicios, empleadosSinPerfil = [], selectedDate }) {
   const router = useRouter();
 
   const [activeTab, setActiveTab] = useState("agenda");
@@ -271,16 +271,27 @@ export default function AdminDashboard({ agendaData, profesionales, servicios, s
             <form onSubmit={handleCreateProfessional} className="space-y-4">
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-[#F2ECE2]/80 mb-1">
-                  ID Usuario (Empleado)
+                  Seleccionar Empleado
                 </label>
-                <input
-                  type="number"
+                <select
                   value={profUserId}
                   onChange={(e) => setProfUserId(e.target.value)}
                   required
-                  placeholder="ID del usuario con rol empleado"
-                  className="w-full rounded border border-[#B08D57]/20 bg-[#1C1A17] px-3 py-2 text-sm text-[#F2ECE2] focus:border-[#B08D57] focus:outline-none font-mono"
-                />
+                  className="w-full rounded border border-[#B08D57]/20 bg-[#1C1A17] px-3 py-2 text-sm text-[#F2ECE2] focus:border-[#B08D57] focus:outline-none"
+                >
+                  <option value="">Selecciona un empleado...</option>
+                  {empleadosSinPerfil.length === 0 ? (
+                    <option disabled value="">
+                      No hay empleados sin perfil
+                    </option>
+                  ) : (
+                    empleadosSinPerfil.map((emp) => (
+                      <option key={emp.id} value={emp.id}>
+                        {emp.nombre} ({emp.email})
+                      </option>
+                    ))
+                  )}
+                </select>
               </div>
 
               <div>
@@ -338,5 +349,7 @@ export default function AdminDashboard({ agendaData, profesionales, servicios, s
     </div>
   );
 }
+
+// modified
 
 // modified
